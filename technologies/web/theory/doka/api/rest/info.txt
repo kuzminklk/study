@@ -1,0 +1,40 @@
+
+
+REST (Representational State Transfer) 
+Based on HTTP verbs
+
+
+К примеру:
+'
+GET http://127.0.0.1:3500/employees HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6Ik5vYSIsInJvbGVzIjpbMixudWxsLG51bGxdfSwiaWF0IjoxNzY0NzAwNDk3LCJleHAiOjE3NjQ3MDEwOTd9.Jj4eFgDcPIqWutWU9wVRS91-uJY51Zu6LJEQZbTC8is
+'
+
+
+CRUD операции:
+'
+GET /api/members HTTP/1.1
+'
+
+'
+POST /api/members HTTP/1.1
+Host: www.example.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 35
+
+username=john.doe&email=john.doe%40example.com
+'
+
+'
+PUL /api/members HTTP/1.1
+Host: www.example.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 35
+
+email=john%40example.com
+'
+
+'
+DELETE /api/members HTTP/1.1
+'
+

@@ -1,0 +1,3 @@
+
+HTTP
+X-Frame-Options: SAMEORIGIN

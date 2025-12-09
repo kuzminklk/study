@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@squoosh/lib": "^0.5.3",
+    "busboy": "^1.6.0"
+  }
+}

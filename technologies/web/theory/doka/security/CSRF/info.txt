@@ -1,0 +1,14 @@
+
+
+CSRF — Cross-Site Request Forgery 
+
+HTTP
+Set-Cookie: key=value; SameSite=Strict
+
+HTTP
+Set-Cookie: key=value; HttpOnly
+
+CSRF-token
+<form action="/send_money/" method="POST">
+  <input type="hidden" name="CSRF" value="token-generated-by-server">
+</form>
