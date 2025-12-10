@@ -1,3 +1,0 @@
-import math
-
-# sin, cos, tg, log, pow, sqr, ...

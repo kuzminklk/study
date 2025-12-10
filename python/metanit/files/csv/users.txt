@@ -1,4 +1,0 @@
-Tom,23
-Joe,12
-Garry,33
-Sam,34
