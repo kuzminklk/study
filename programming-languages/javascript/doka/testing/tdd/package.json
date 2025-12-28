@@ -1,0 +1,12 @@
+{
+	"name": "testing",
+	"version": "1.0.0",
+	"description": "",
+	"license": "ISC",
+	"author": "",
+	"type": "module",
+	"main": "calculator.js",
+	"scripts": {
+		"test": "NODE_OPTIONS=--experimental-vm-modules jest"
+	}
+}

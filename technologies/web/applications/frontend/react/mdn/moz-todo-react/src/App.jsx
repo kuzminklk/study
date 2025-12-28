@@ -1,9 +1,15 @@
+
+
+import { useEffect, useRef, useState } from 'react';
+
 import Todo from './components/Todo';
 import Form from './components/Form';
 import FilterButton from './components/FilterButton';
-import { useEffect, useRef, useState } from 'react';
-import { nanoid } from 'nanoid';
+
 import usePrevious from './hooks/usePrevious';
+
+import { nanoid } from 'nanoid';
+
 
 const FILTER_MAP = {
 	All: () => true,
