@@ -17,12 +17,6 @@
       "title": "My House",
       "datetime": "2021",
       "body": "I've build a new house! I decide to color walls in orange."
-    },
-    {
-      "id": "3",
-      "title": "I've learned new things",
-      "datetime": "2025",
-      "body": "Data Provider"
     }
   ]
 }

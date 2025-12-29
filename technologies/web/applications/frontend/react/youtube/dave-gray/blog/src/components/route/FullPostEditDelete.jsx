@@ -1,16 +1,25 @@
 
 
-import { useEffect } from 'react'
+import { useEffect, useContext, useState } from 'react'
 
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 
-import { useContext} from 'react'
-import DataContext from './context/DataContext'
+import api from '../../api/posts'
+import DataContext from '../../context/DataContext'
 
 
 export default function PostPage() {
 
-	const { posts, handleDelete, handleUpdate, setEditedPost, editedPost } = useContext(DataContext);
+	const { posts, setPosts } = useContext(DataContext);
+
+	const navigate = useNavigate();
+
+	const [editedPost, setEditedPost] = useState({
+		id: '',
+		title: '',
+		datetime: '2025',
+		body: ''
+	});
 
 	const { id } = useParams();
 	const post = posts.find(post => (post.id).toString() === id);
@@ -20,6 +29,28 @@ export default function PostPage() {
 			setEditedPost(post);
 		}
 	}, [])
+
+	async function handleDelete(id) {
+		try {
+			await api.delete(`/posts/${id}`);
+			const filteredPosts = posts.filter(post => post.id !== id);
+			setPosts(filteredPosts);
+			navigate('/');
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
+	async function handleUpdate(event) {
+		event.preventDefault();
+		try {
+			const response = await api.put(`/posts/${editedPost.id}`, editedPost);
+			setPosts(posts.map( (post) => (post.id === editedPost.id ? response.data : post)))
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
 
 	return (
 		post ? (

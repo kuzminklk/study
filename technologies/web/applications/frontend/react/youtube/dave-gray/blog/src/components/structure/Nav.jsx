@@ -3,7 +3,7 @@
 import { NavLink } from 'react-router-dom'
 
 import { useContext} from 'react'
-import DataContext from './context/DataContext'
+import DataContext from '../../context/DataContext'
 
 
 export default function Nav() {
