@@ -12,3 +12,7 @@ docs/
 
 # Dotenv file
 .env
+
+# Libraries and broadcasts
+/lib
+/broadcast
