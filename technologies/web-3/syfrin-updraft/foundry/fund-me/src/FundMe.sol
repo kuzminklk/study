@@ -19,8 +19,8 @@ contract FundMe {
 	address public immutable OWNER;
 	address public immutable PRICE_FEED_ADDRESS; 
 
-	address[] public s_funders;
-	mapping(address funder => uint256 amountFunded) public s_addressToAmountFunded;
+	address[] public sFunders;
+	mapping(address funder => uint256 amountFunded) public sAddressToAmountFunded;
 
 	constructor(address priceFeedAddress) {
 		OWNER = msg.sender;
@@ -29,8 +29,8 @@ contract FundMe {
 
 	function fund() public payable {
 		require(msg.value.getConversionRate(PRICE_FEED_ADDRESS) >= MINIMUM_USD, "Minimum contribution is $5");
-		s_funders.push(msg.sender);
-		s_addressToAmountFunded[msg.sender] += msg.value;
+		sFunders.push(msg.sender);
+		sAddressToAmountFunded[msg.sender] += msg.value;
 	} 
 
 	function withdraw() public onlyOwner {
@@ -38,14 +38,14 @@ contract FundMe {
 		(bool success,) = payable(OWNER).call{value: address(this).balance}("");
 		if (!success) revert FundMe__CallFailed();
 
-		uint256 fundersLength = s_funders.length;
+		uint256 fundersLength = sFunders.length;
 
 		for(uint256 funderIndex = 0; funderIndex < fundersLength; funderIndex++) {
-				address funder = s_funders[funderIndex];
-				s_addressToAmountFunded[funder] = 0;
+				address funder = sFunders[funderIndex];
+				sAddressToAmountFunded[funder] = 0;
 		}
 
-		s_funders = new address[](0);
+		sFunders = new address[](0);
 	}
 
 	receive() external payable { fund(); }

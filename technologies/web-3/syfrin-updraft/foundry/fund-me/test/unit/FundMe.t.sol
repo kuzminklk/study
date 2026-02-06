@@ -44,12 +44,12 @@ contract FundMeTest is Test {
 	}
 
 	function testFundsUpdatesData() public funded {
-		uint256 amountFunded = fundMe.s_addressToAmountFunded(USER);
+		uint256 amountFunded = fundMe.sAddressToAmountFunded(USER);
 		assertEq(amountFunded, SEND_VALUE);
 	}
 
 	function testAddsFunderToArray() public funded {
-		address funder = fundMe.s_funders(0);
+		address funder = fundMe.sFunders(0);
 		assertEq(funder, USER);
 	}
 

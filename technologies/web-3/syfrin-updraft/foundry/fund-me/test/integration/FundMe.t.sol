@@ -27,7 +27,7 @@ contract FundMeTestIntegration is Test {
 	function testUserCanFund() public {
 		vm.prank(USER);
 		fundMe.fund{value: SEND_VALUE}();
-		address funder = fundMe.s_funders(0);
+		address funder = fundMe.sFunders(0);
 		assertEq(funder, address(USER));
 	}
 

@@ -14,5 +14,5 @@ docs/
 .env
 
 # Libraries and broadcasts
-/lib
-/broadcast
+lib/
+broadcast/
