@@ -11,3 +11,6 @@ git branch -m <old-name> <new-name>
 git push origin -u <new-name>
 #Remove old name from remote
 git push origin --delete <old-name>
+
+# Rewrite history
+git rebase -i HEAD~2
