@@ -1,0 +1,39 @@
+
+
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.19; 
+
+import { Script } from "forge-std/Script.sol";
+import { Raffle } from "src/Raffle.sol";
+import { HelperConfig } from "script/HelperConfig.s.sol";
+
+
+contract Deploy is Script {
+
+	function run() public {
+
+	}
+
+	function deploy() public returns(Raffle, HelperConfig) {
+		HelperConfig configContract = new HelperConfig();
+		/* 
+		For local (Anvil): deploy mocks, get local config.
+		For Sepolia: get Sepolia config.
+		*/
+		HelperConfig.NetworkConfig memory config = configContract.getConfig();
+
+		vm.startBroadcast();
+			Raffle raffle = new Raffle(
+				config.entranceFee,
+				config.interval,
+				config.vrfCoordinator,
+				config.subscriptionId,
+				config.gasLane,
+				config.callbackGasLimit
+			);
+		vm.stopBroadcast();
+		return(raffle, configContract);
+	}
+}
+
