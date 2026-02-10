@@ -9,28 +9,28 @@ import { Raffle } from "src/Raffle.sol";
 import { HelperConfig } from "script/HelperConfig.s.sol";
 
 
-contract Deploy is Script {
+contract DeployRaffle is Script {
 
 	function run() public {
 
 	}
 
-	function deploy() public returns(Raffle, HelperConfig) {
+	function deployContract() public returns(Raffle, HelperConfig) {
 		HelperConfig configContract = new HelperConfig();
 		/* 
 		For local (Anvil): deploy mocks, get local config.
 		For Sepolia: get Sepolia config.
 		*/
-		HelperConfig.NetworkConfig memory config = configContract.getConfig();
+		HelperConfig.NetworkConfig memory networkConfig = configContract.getNetworkConfig();
 
 		vm.startBroadcast();
 			Raffle raffle = new Raffle(
-				config.entranceFee,
-				config.interval,
-				config.vrfCoordinator,
-				config.subscriptionId,
-				config.gasLane,
-				config.callbackGasLimit
+				networkConfig.entranceFee,
+				networkConfig.interval,
+				networkConfig.vrfCoordinator,
+				networkConfig.subscriptionId,
+				networkConfig.gasLane,
+				networkConfig.callbackGasLimit
 			);
 		vm.stopBroadcast();
 		return(raffle, configContract);

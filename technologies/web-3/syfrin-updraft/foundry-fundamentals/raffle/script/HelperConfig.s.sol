@@ -38,7 +38,7 @@ contract HelperConfig is Script {
 		networkConfigs[ANVIL_CHAIN_ID] = getOrCreateAnvilConfig();
 	}
 
-	function getConfig() public view returns(NetworkConfig memory) {
+	function getNetworkConfig() public view returns(NetworkConfig memory) {
 		return getConfigByChainId(block.chainid);
 	}
 
@@ -50,7 +50,7 @@ contract HelperConfig is Script {
 		}
 	}
 
-	function getSepoliaConfig() public view returns(NetworkConfig memory) {
+	function getSepoliaConfig() public pure returns(NetworkConfig memory) {
 		return NetworkConfig({
 			entranceFee: 0.01 ether, // 1e16
 			interval: 30, // 30 seconds
