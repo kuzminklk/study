@@ -1,0 +1,3 @@
+[submodule "technologies/web-3/syfrin-updraft/foundry-fundamentals/raffle/lib/solmate"]
+	path = technologies/web-3/syfrin-updraft/foundry-fundamentals/raffle/lib/solmate
+	url = https://github.com/transmissions11/solmate
