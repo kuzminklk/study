@@ -8,11 +8,7 @@ import { Script } from "forge-std/Script.sol";
 import { VRFCoordinatorV2_5Mock } from "@chainlink/contracts/src/v0.8/vrf/mocks/VRFCoordinatorV2_5Mock.sol";
 import { LinkToken } from "test/mocks/LinkToken.sol";
 
-
-contract HelperConfig is Script {
-
-	error HelperConfig__InvalidChainId();
-
+contract Constants {
 	// VRFCoordinator-mock values
 	uint96 public MOCK_BASE_FEE = 0.001 ether;
 	uint96 public MOCK_GAS_PRICE_LINK = 1e9;
@@ -20,6 +16,11 @@ contract HelperConfig is Script {
 
 	uint256 constant ETH_SEPOLIA_CHAIN_ID = 11155111;
 	uint256 constant ANVIL_CHAIN_ID = 31337;
+}
+
+contract HelperConfig is Script, Constants {
+
+	error HelperConfig__InvalidChainId();
 
 	struct NetworkConfig {
 		uint256 entranceFee;

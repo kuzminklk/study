@@ -47,7 +47,15 @@ contract FundSubscription is Script {
 		HelperConfig.NetworkConfig memory networkConfig = helperConfig.getNetworkConfig();
 		address vrfCoordinator = networkConfig.vrfCoordinator;
 		uint256 subscriptionId = networkConfig.subscriptionId;
-		address linkToken = networkConfig.linkTokenContract;
+		address linkTokenContract = networkConfig.linkTokenContract;
+		fundSubscription(vrfCoordinator, subscriptionId, linkTokenContract);
 	}
 
+	function fundSubscription(address vrfCoordinator, uint256 subscriptionId, address linkTokenContract) public {
+		console.log("Funding subscription: ", subscriptionId);
+		console.log("Using vrfCoordinator: ", vrfCoordinator);
+		console.log("On chain id", block.chainid);
+
+		if(block.chainid == LOCAL)
+	}
 }
