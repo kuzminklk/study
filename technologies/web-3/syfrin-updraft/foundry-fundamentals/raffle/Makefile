@@ -8,5 +8,6 @@ build:; forge build
 
 install:
 	forge install foundry-rs/forge-std --no-git;
+	forge install Cyfrin/foundry-devops --no-git;
 	forge install smartcontractkit/chainlink-brownie-contracts --no-git;
 	forge install transmissions11/solmate --no-git;

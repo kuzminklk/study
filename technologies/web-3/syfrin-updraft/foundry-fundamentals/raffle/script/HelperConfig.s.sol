@@ -14,6 +14,8 @@ contract Constants {
 	uint96 public MOCK_GAS_PRICE_LINK = 1e9;
 	int256 public MOCK_WEI_PER_LINK = 4e15;
 
+	uint256 public constant SUBSCRIPTION_FUND_AMOUT = 1 ether; // Equal 1 LINK
+
 	uint256 constant ETH_SEPOLIA_CHAIN_ID = 11155111;
 	uint256 constant ANVIL_CHAIN_ID = 31337;
 }
