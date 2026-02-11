@@ -5,6 +5,7 @@
 pragma solidity ^0.8.19; 
 
 import { Test } from "forge-std/Test.sol";
+
 import { Raffle } from "src/Raffle.sol";
 import { DeployRaffle } from "script/DeployRaffle.s.sol";
 import { HelperConfig } from "script/HelperConfig.s.sol";
@@ -83,4 +84,99 @@ contract RaffleTest is Test {
 		vm.prank(USER);
 		raffle.enterRaffle{value: networkConfig.entranceFee}();
 	}
-}
+
+
+	/* —————— Check Upkeep —————— */
+
+	function testCheckUpkeepReturnsFalseIfRaffleHasNoBalance() public {
+		// Arrange
+		vm.warp(block.timestamp + networkConfig.interval + 1);
+		vm.roll(block.number + 1);
+
+		// Act
+		(bool upkeepNeeded, ) = raffle.checkUpkeep("");
+
+		// Assert
+		assert(!upkeepNeeded);
+	}
+
+	function testCheckUpkeepReturnsFalseIfRaffleIsntOpen() public {
+		// Arrange
+		vm.prank(USER);
+		raffle.enterRaffle{value: networkConfig.entranceFee}();
+		vm.warp(block.timestamp + networkConfig.interval + 1);
+		vm.roll(block.number + 1);
+		raffle.performUpkeep("");
+
+		// Act
+		(bool upkeepNeeded, ) = raffle.checkUpkeep("");
+
+		// Assert
+		assert(!upkeepNeeded);
+	}
+
+	function testCheckUpkeepReturnsFalseIfTimeDosentPass() public {
+		// Arrange
+		vm.prank(USER);
+		raffle.enterRaffle{value: networkConfig.entranceFee}();
+
+		// Act
+		(bool upkeepNeeded, ) = raffle.checkUpkeep("");
+
+		// Assert
+		assert(!upkeepNeeded);
+	}
+
+	function testCheckUpkeepReturnsTrueIfAllParametersAreOk() public {
+		// Arrange
+		vm.prank(USER);
+		raffle.enterRaffle{value: networkConfig.entranceFee}();
+		vm.warp(block.timestamp + networkConfig.interval + 1);
+		vm.roll(block.number + 1);
+
+		// Act
+		(bool upkeepNeeded, ) = raffle.checkUpkeep("");
+
+		// Assert
+		assert(upkeepNeeded);
+	}
+
+
+	/* —————— Perform Upkeep —————— */
+
+	function testPerformUpkeepCanOnlyRunIfCheckUpkeepIsTrue() public {
+		// Arrange
+		vm.prank(USER);
+		raffle.enterRaffle{value: networkConfig.entranceFee}();
+		vm.warp(block.timestamp + networkConfig.interval + 1);
+		vm.roll(block.number + 1);
+
+		// Acr & Assert
+		raffle.performUpkeep("");
+	}
+
+	function testPerformUpkeepRevertsIfCheckUpkeepIsFalse() public {
+		// Arrange
+		uint256 balance = 0;
+		uint256 numberOfPlayers = 0;
+		Raffle.RaffleState raffleState = raffle.getRaffleState(); 
+
+		// Act & Assert
+		vm.expectRevert(
+			abi.encodeWithSelector(Raffle.Raffle__UpkeepNotNeeded.selector, balance, numberOfPlayers, raffleState)
+		);
+		raffle.performUpkeep("");
+	}
+
+	function testPerformUpkeepUpdatesRaffleStateAndEmitsRequestId() public {
+		// Arrange
+
+	}
+
+	modifier userEnterRaffle() {
+		vm.prank(USER);
+		raffle.enterRaffle{value: networkConfig.entranceFee}();
+		_;
+	}
+	
+	}

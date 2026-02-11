@@ -72,9 +72,10 @@ contract Raffle is VRFConsumerBaseV2Plus {
 	// Events
 	event RaffleEntered(address indexed player);
 	event WinnerPicked(address indexed winner);
+	event RequestedRaffleWinner(uint256 indexed requestId);
 
 
-	constructor(uint256 entranceFee, uint256 interval, address vrfCoordinator, uint256 subscriptionId, bytes32 gasLane, uint32 callbackGasLimit) VRFConsumerBaseV2Plus(vrfCoordinator) {
+	constructor(uint256 entranceFee, uint256 interval, address vrfCoordinatorContract, uint256 subscriptionId, bytes32 gasLane, uint32 callbackGasLimit) VRFConsumerBaseV2Plus(vrfCoordinatorContract) {
 		i_entranceFee = entranceFee;
 		i_interval = interval;
 		i_keyHash = gasLane;
@@ -127,8 +128,8 @@ contract Raffle is VRFConsumerBaseV2Plus {
 
 		s_raffleState = RaffleState.CALCULATING;
 
-		uint256 requestID = s_vrfCoordinator.requestRandomWords(VRFV2PlusClient.RandomWordsRequest({
-					keyHash: i_keyHash,
+		uint256 requestId = s_vrfCoordinator.requestRandomWords(VRFV2PlusClient.RandomWordsRequest({
+					keyHash: i_keyHash,	
 					subId: i_subscriptionId,
 					requestConfirmations: REQUEST_CONFIRMATION,
 					callbackGasLimit: i_callbackGasLimit,
@@ -136,6 +137,8 @@ contract Raffle is VRFConsumerBaseV2Plus {
 					extraArgs: VRFV2PlusClient._argsToBytes(VRFV2PlusClient.ExtraArgsV1({nativePayment: true})) // new parameter
 				})
 		);
+
+		emit RequestedRaffleWinner(requestId);
 	}
 
 
