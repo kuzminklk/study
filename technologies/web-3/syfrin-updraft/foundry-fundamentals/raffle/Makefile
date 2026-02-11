@@ -7,5 +7,6 @@ build:; forge build
 # 	forge script script/Deploy.s.sol --rpc-url sepolia --broadcast --account development --verify --etherscan-api-key ${ETHERSCAN_API_KEY}
 
 install:
+	forge install foundry-rs/forge-std --no-git;
 	forge install smartcontractkit/chainlink-brownie-contracts --no-git;
-	forge install transmissions11/solmate --no-git
+	forge install transmissions11/solmate --no-git;
