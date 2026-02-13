@@ -12,10 +12,10 @@ import { FundMe } from "../src/FundMe.sol";
 
 contract Fund is Script {
 		
-	uint256 constant SEND_VALUE = 0.1 ether;
+	uint256 constant TEST_SEND_VALUE = 0.1 ether;
 
 	function fund(address fundMe) public {
-		FundMe(payable(fundMe)).fund{value: SEND_VALUE}();
+		FundMe(payable(fundMe)).fund{value: TEST_SEND_VALUE}();
 	}
 
 	function run() external {
@@ -30,7 +30,7 @@ contract Fund is Script {
 
 contract Withdraw is Script {
 				
-	uint256 constant SEND_VALUE = 0.1 ether;
+	uint256 constant TEST_SEND_VALUE = 0.1 ether;
 
 	function withdraw(address fundMe) public {
 		FundMe(payable(fundMe)).withdraw();

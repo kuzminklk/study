@@ -14,19 +14,19 @@ contract FundMeTestIntegration is Test {
 
 	FundMe fundMe;
 
-	uint256 constant SEND_VALUE = 0.1 ether;
-	uint256 constant STARTING_BALANCE = 10 ether;
+	uint256 constant TEST_SEND_VALUE = 0.1 ether;
+	uint256 constant TEST_STARTING_BALANCE = 10 ether;
 	address immutable USER = makeAddr("user");
 
 	function setUp() external {
 		Deploy deploy = new Deploy();
 		fundMe = deploy.run();
-		vm.deal(USER, STARTING_BALANCE);
+		vm.deal(USER, TEST_STARTING_BALANCE);
 	}
 
 	function testUserCanFund() public {
 		vm.prank(USER);
-		fundMe.fund{value: SEND_VALUE}();
+		fundMe.fund{value: TEST_SEND_VALUE}();
 		address funder = fundMe.sFunders(0);
 		assertEq(funder, address(USER));
 	}

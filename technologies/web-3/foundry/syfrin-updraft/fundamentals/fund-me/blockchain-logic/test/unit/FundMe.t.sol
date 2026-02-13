@@ -14,14 +14,14 @@ contract FundMeTest is Test {
 
 	FundMe fundMe;
 
-	uint256 constant SEND_VALUE = 0.1 ether;
-	uint256 constant STARTING_BALANCE = 10 ether;
+	uint256 constant TEST_SEND_VALUE = 0.1 ether;
+	uint256 constant TEST_STARTING_BALANCE = 10 ether;
 	address immutable USER = makeAddr("user");
 
 	function setUp() external {
 		Deploy deploy = new Deploy();
 		fundMe = deploy.run();
-		vm.deal(USER, STARTING_BALANCE);
+		vm.deal(USER, TEST_STARTING_BALANCE);
 	}
 
 
@@ -45,7 +45,7 @@ contract FundMeTest is Test {
 
 	function testFundsUpdatesData() public funded {
 		uint256 amountFunded = fundMe.sAddressToAmountFunded(USER);
-		assertEq(amountFunded, SEND_VALUE);
+		assertEq(amountFunded, TEST_SEND_VALUE);
 	}
 
 	function testAddsFunderToArray() public funded {
@@ -84,8 +84,8 @@ contract FundMeTest is Test {
 		uint160 numberOfFunders = 10; // Will generate addresses from this
 		uint160 staringFunderIndex = 1;
 		for(uint160 i = staringFunderIndex; i < numberOfFunders; i++) {
-			hoax(address(i), SEND_VALUE);
-			fundMe.fund{value:SEND_VALUE}();
+			hoax(address(i), TEST_SEND_VALUE);
+			fundMe.fund{value:TEST_SEND_VALUE}();
 		}
 
 		uint256 startingOwnerBalance = fundMe.OWNER().balance;
@@ -105,7 +105,7 @@ contract FundMeTest is Test {
 
 	modifier funded() {
 		vm.prank(USER);
-		fundMe.fund{value: SEND_VALUE}();
+		fundMe.fund{value: TEST_SEND_VALUE}();
 		_;
 	}
 
