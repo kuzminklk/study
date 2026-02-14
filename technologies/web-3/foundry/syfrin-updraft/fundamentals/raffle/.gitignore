@@ -10,9 +10,9 @@ out/
 # Docs
 docs/
 
-# Dotenv file
 .env
 
-# Libraries and broadcasts
-lib/
-broadcast/
+lib
+cache
+out
+
