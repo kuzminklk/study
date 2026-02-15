@@ -1,0 +1,3 @@
+[submodule "technologies/web-3/applications/frontend/cyfrin-updraft/buy-me-a-coffee"]
+	path = technologies/web-3/applications/frontend/cyfrin-updraft/buy-me-a-coffee
+	url = git@github.com:kuzminklk/buy-me-a-coffee.git
