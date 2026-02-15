@@ -1,6 +1,6 @@
 
 
-import { createWalletClient, createPublicClient, parseEther, custom } from "https://esm.sh/viem"
+import { createWalletClient, createPublicClient, parseEther, formatEther, custom } from "https://esm.sh/viem"
 import { sepolia } from "https://esm.sh/viem/chains"
 import { contractAddress, abi } from "./constants.js"
 
@@ -8,11 +8,14 @@ import { contractAddress, abi } from "./constants.js"
 const connectButton = document.getElementById("connectButton")
 const fundButton = document.getElementById("fundButton")
 const getBalanceButton = document.getElementById("getBalanceButton")
+const withdrawButton = document.getElementById("withdrawButton")
+const balanceSpan = document.getElementById("balance")
 const etherAmountInput = document.getElementById("etherAmount")
 
 connectButton.addEventListener("click", connectWallet)
 fundButton.addEventListener("click", fund)
 getBalanceButton.addEventListener("click", getBalance)
+withdrawButton.addEventListener("click", withdraw)
 
 let walletClient
 let publicClient
@@ -31,32 +34,19 @@ async function connectWallet() {
 	}
 
 	walletClient = await createWalletClient(clientConfig);
+	publicClient = await createPublicClient(clientConfig);
 
 	[connectedAccount] = await walletClient.requestAddresses()
 	connectButton.innerText = "Connected"
 }
 
 
-// Helper function to check connection status and connect if it's not
-async function performConnection() {
-	if (typeof walletClient === "undefined") {
-		try {
-			await connectWallet()
-			return true
-		} catch {
-			return false
-		}
-	}
-}
-
-
 async function fund() {
-	if (!performConnection()) {
-		return
+	if (typeof walletClient === "undefined") {
+		await connectWallet()
 	}
 
 	const etherAmount = etherAmountInput.value
-	publicClient = await createPublicClient(clientConfig)
 
 	const { request } = await publicClient.simulateContract({
 		address: contractAddress,
@@ -72,9 +62,30 @@ async function fund() {
 
 
 async function getBalance() {
-	if (!performConnection()) {
-		return
+	if (typeof walletClient === "undefined") {
+		await connectWallet()
 	}
 
+	const balance = await publicClient.getBalance({
+		address: contractAddress
+	})
 
+	balanceSpan.innerText = formatEther(balance)
+}
+
+
+async function withdraw() {
+	if (typeof walletClient === "undefined") {
+		await connectWallet()
+	}
+
+	const { request } = await publicClient.simulateContract({
+		address: contractAddress,
+		abi: abi,
+		functionName: "withdraw",
+		account: connectedAccount,
+		chain: sepolia
+	})
+
+	await walletClient.writeContract(request)
 }
