@@ -14,3 +14,6 @@ git push origin --delete <old-name>
 
 # Rewrite history
 git rebase -i HEAD~2
+
+# Push new branch to remote
+git push -u origin naked
