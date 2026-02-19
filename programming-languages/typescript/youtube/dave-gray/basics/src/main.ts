@@ -241,9 +241,9 @@ interface Musician {
 	play(): void
 }
 
-class Guitarist implements Musician {
+class Pianist implements Musician {
 	name: string
-	instrument: Instrument = "Guitar"
+	instrument: Instrument = "Piano"
 
 	constructor(name: string) {
 		this.name = name
@@ -254,8 +254,8 @@ class Guitarist implements Musician {
 	}
 }
 
-let loudGuitarist: Guitarist = new Guitarist("Alex")
-loudGuitarist.play()
+let pianis: Pianist = new Pianist("Alex")
+pianis.play()
 
 
 // ——— Static properties ———
@@ -296,3 +296,189 @@ class Website {
 
 let google:Website = new Website()
 console.log("From «Classes» topic. Status: ", google.status)
+
+
+
+// ————————— Index Signatures —————————
+
+interface Transactions {
+	[index: string]: number
+}
+
+const transactions: Transactions = {
+	job: 100,
+	book: 5,
+	electricity: 10,
+	water: 10,
+	clothes: 10
+}
+
+Object.keys(transactions).map( key => { 
+	console.log("From «Index Signatures» topic. Value: ", transactions[key])
+} )
+
+type Streams = "salary" | "bonus" | "sidehustle"
+
+type Incomes = Record<Streams, number>
+
+const monthlyIncomes: Incomes = {
+	"salary": 100,
+	"bonus": 20,
+	"sidehustle": 5
+}
+
+for (let revenue in monthlyIncomes) {
+	console.log("From «Index Signatures» topic. Revenue: ", monthlyIncomes[revenue as keyof Incomes])
+}
+
+
+
+// ————————— Generics —————————
+
+function isObject<Type>(arg: Type): boolean {
+	return (typeof arg === "object" && !Array.isArray(arg) && arg !== null)
+}
+
+interface hasId {
+	id: number
+}
+
+function getProperties<Type extends hasId, Key extends keyof Type>(objects: Type[], key: Key): Type[Key][] {
+	return objects.map(property => property[key])
+}
+
+const users = [
+	{
+		"id": 1,
+		"name": "Sara"
+	},
+	{
+		"id": 2,
+		"name": "Dave"
+	}
+]
+
+console.log("From «Generics» topic. Properties:" ,getProperties(users, "name"))
+
+
+// ——— In classes ———
+
+class State<Type> {
+	private savedState: Type
+
+	constructor(arg: Type) {
+		this.savedState = arg
+	}
+
+	get state(): Type {
+		return this.savedState
+	}
+
+	set state(arg: Type) {
+		this.savedState = arg
+	}
+}
+
+let weather = new State<string[]>(["sunny","wet"])
+
+
+
+// ————————— Utility Types —————————
+
+// ——— Partial ———
+
+interface User {
+	id: number
+	name: string
+	age: number
+	verified?: boolean
+}
+
+function updateUser(current: User, update: Partial<User>): User {
+	return {...current, ...update}
+}
+
+const websiteUser: User = {
+	id: 0,
+	name: "Don",
+	age: 27
+}
+
+updateUser(websiteUser, { age: 30 })
+
+
+// ——— Required ———
+
+function recordToDatabase(user: Required<User>) {
+	// …
+}
+
+
+// ——— Readonly ———
+
+const verifiedUser: Readonly<User> = updateUser(websiteUser, { verified: true })
+
+// Restricted
+// verifiedUser.verified = false
+
+
+// ——— Record ———
+
+const hexColorMap: Record<string, string> = {
+	"red": "FF0000"
+}
+
+
+// ——— Pick and omit ———
+
+let userAge: Pick<User, "age"> = {
+	age: websiteUser.age
+}
+
+let hiddenUser: Omit<User, "id"> = {
+	name: "Sara",
+	age: 17
+}
+
+
+// ——— Exclude and extract ———
+
+type Grades = "A" | "B" | "C" | "D" | "U"
+
+type adjustedGrades = Exclude<Grades, "U">
+
+type highGrades = 	Extract<Grades, "A" | "B">
+
+
+// ——— Nonnullable ———
+
+type Cars = "BMW" | "Audi" | null
+
+type existedCars = NonNullable<Cars>
+
+
+// ——— Return type ———
+
+function writeBook(text:string[], author: string, price: number) {
+	return [text, author, price]
+}
+
+type ReturnFromWiteBook = ReturnType<typeof writeBook>
+
+
+// ——— Parameters ———
+
+type ParametersFromWiteBook = Parameters<typeof writeBook>
+
+
+// ——— Awaited ———
+
+async function fetchUsers(): Promise<User[]> {
+	const data = await fetch("https://jsonplaceholder.typicode.com/users")
+	.then(responce => responce.json())
+	.catch(error => console.error(reportError))
+
+	return data
+}
+
+type fetchUserReturns = Awaited<ReturnType<typeof fetchUsers>>

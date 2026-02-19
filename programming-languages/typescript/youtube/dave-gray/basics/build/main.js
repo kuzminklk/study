@@ -116,9 +116,9 @@ class FrontEndDeveloper extends Developer {
 }
 let developer = new Developer("Alex", 33);
 let frontEndDeveloper = new FrontEndDeveloper("Sam", 44, "React");
-class Guitarist {
+class Pianist {
     name;
-    instrument = "Guitar";
+    instrument = "Piano";
     constructor(name) {
         this.name = name;
     }
@@ -126,8 +126,8 @@ class Guitarist {
         console.log("From «Classes» topic. Playing: Do Re Mi Fa");
     }
 }
-let loudGuitarist = new Guitarist("Alex");
-loudGuitarist.play();
+let pianis = new Pianist("Alex");
+pianis.play();
 // ——— Static properties ———
 class Person {
     name;
@@ -158,5 +158,95 @@ class Website {
 }
 let google = new Website();
 console.log("From «Classes» topic. Status: ", google.status);
+const transactions = {
+    job: 100,
+    book: 5,
+    electricity: 10,
+    water: 10,
+    clothes: 10
+};
+Object.keys(transactions).map(key => {
+    console.log("From «Index Signatures» topic. Value: ", transactions[key]);
+});
+const monthlyIncomes = {
+    "salary": 100,
+    "bonus": 20,
+    "sidehustle": 5
+};
+for (let revenue in monthlyIncomes) {
+    console.log("From «Index Signatures» topic. Revenue: ", monthlyIncomes[revenue]);
+}
+// ————————— Generics —————————
+function isObject(arg) {
+    return (typeof arg === "object" && !Array.isArray(arg) && arg !== null);
+}
+function getProperties(objects, key) {
+    return objects.map(property => property[key]);
+}
+const users = [
+    {
+        "id": 1,
+        "name": "Sara"
+    },
+    {
+        "id": 2,
+        "name": "Dave"
+    }
+];
+console.log("From «Generics» topic. Properties:", getProperties(users, "name"));
+// ——— In classes ———
+class State {
+    savedState;
+    constructor(arg) {
+        this.savedState = arg;
+    }
+    get state() {
+        return this.savedState;
+    }
+    set state(arg) {
+        this.savedState = arg;
+    }
+}
+let weather = new State(["sunny", "wet"]);
+function updateUser(current, update) {
+    return { ...current, ...update };
+}
+const websiteUser = {
+    id: 0,
+    name: "Don",
+    age: 27
+};
+updateUser(websiteUser, { age: 30 });
+// ——— Required ———
+function recordToDatabase(user) {
+    // …
+}
+// ——— Readonly ———
+const verifiedUser = updateUser(websiteUser, { verified: true });
+// Restricted
+// verifiedUser.verified = false
+// ——— Record ———
+const hexColorMap = {
+    "red": "FF0000"
+};
+// ——— Pick and omit ———
+let userAge = {
+    age: websiteUser.age
+};
+let hiddenUser = {
+    name: "Sara",
+    age: 17
+};
+// ——— Return type ———
+function writeBook(text, author, price) {
+    return [text, author, price];
+}
+// ——— Awaited ———
+async function fetchUsers() {
+    const data = await fetch("https://jsonplaceholder.typicode.com/users")
+        .then(responce => responce.json())
+        .catch(error => console.error(reportError));
+    return data;
+}
 export {};
 //# sourceMappingURL=main.js.map
