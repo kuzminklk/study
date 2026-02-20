@@ -1,3 +1,6 @@
 [submodule "technologies/web-3/applications/frontend/cyfrin-updraft/buy-me-a-coffee"]
 	path = technologies/web-3/applications/frontend/cyfrin-updraft/buy-me-a-coffee
 	url = git@github.com:kuzminklk/buy-me-a-coffee.git
+[submodule "programming-languages/typescript/youtube/dave-gray/to-dos"]
+	path = programming-languages/typescript/youtube/dave-gray/to-dos
+	url = git@github.com:kuzminklk/to-dos.git
