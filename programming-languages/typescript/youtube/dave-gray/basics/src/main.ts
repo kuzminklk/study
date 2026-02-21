@@ -1,7 +1,7 @@
 
 
 
-// ————————— Basics —————————
+// ————————— 1. Basics —————————
 
 let userName: string 
 
@@ -14,7 +14,7 @@ if (h1) {
 
 
 
-// ————————— Basic Types —————————
+// ————————— 2. Basic Types —————————
 
 let isLoading: boolean
 let pi: 3.14
@@ -31,7 +31,7 @@ console.log("From «Basic Types» topic. Sum: ", sum(X,Y))
 
 
 
-// ————————— Arrays & Objects —————————
+// ————————— 3. Arrays & Objects —————————
 
 
 // ——— Array ———
@@ -93,7 +93,7 @@ enum Grade {
 
 
 
-// ————————— Functions —————————
+// ————————— 4. Functions —————————
 
 
 // ——— Type aliases ———
@@ -167,7 +167,7 @@ function infinite() {
 
 
 
-// ————————— Assertions —————————
+// ————————— 5. Assertions —————————
 
 // ——— Conver to more or less specific ———
 
@@ -198,7 +198,7 @@ let img2 = document.querySelector("img")! // Not null assertion
 
 
 
-// ————————— Classes —————————
+// ————————— 6. Classes —————————
 
 type Language = "English" | "Russian" | "Spanish"
 
@@ -299,7 +299,7 @@ console.log("From «Classes» topic. Status: ", google.status)
 
 
 
-// ————————— Index Signatures —————————
+// ————————— 7. Index Signatures —————————
 
 interface Transactions {
 	[index: string]: number
@@ -333,7 +333,7 @@ for (let revenue in monthlyIncomes) {
 
 
 
-// ————————— Generics —————————
+// ————————— 8. Generics —————————
 
 function isObject<Type>(arg: Type): boolean {
 	return (typeof arg === "object" && !Array.isArray(arg) && arg !== null)
@@ -383,7 +383,7 @@ let weather = new State<string[]>(["sunny","wet"])
 
 
 
-// ————————— Utility Types —————————
+// ————————— 9. Utility Types —————————
 
 // ——— Partial ———
 
