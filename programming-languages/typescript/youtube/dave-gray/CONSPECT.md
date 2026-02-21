@@ -1,9 +1,6 @@
 
-
-<br>
-
-
 # Studing steps
+
 
 ### 1. Basics of TypeScript (```./basics/… & ./basics/src/main.ts```)
 1. Compilator and basics
@@ -16,28 +13,22 @@
 8. Generics
 9. Utility Types
 
+
 ### 2. [To-Dos pure TypeScript project](https://github.com/kuzminklk/to-dos)
+
 
 ### 3. React + TypeScript basics (```./react-basics```)
 
+Useful hooks:
 
-<br>
-<br>
-<br>
-
-
-# Studing writings
-
-## Useful hooks
-
-### useState()
+useState()
 For creating state variable
 
-### useEffect()
+useEffect()
 For apply action depends on changing some state, etc.
 
-### useCallback()
+useCallback()
 For don't recreate props function each time
 
-### useMemo()
+useMemo()
 For save expensive calculating value

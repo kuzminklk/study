@@ -13,12 +13,14 @@ import type { ReactElement } from "react"
 
 function App(): ReactElement {
 
+	// useState() example
 	const [count, setCount] = useState<number>(0)		
 
  return (
 	<>
 	<Header title={ "Hello, React" } />
 	<Section>Content</Section>
+	{/* Props drilling examples */}
 	<Counter setCount={ setCount }>Count is { count }</Counter>
 	<List 
 	items={ ["Coffee", "Tacos", "Code"] } 

@@ -3,6 +3,7 @@
 import type { ReactNode } from "react"
 
 
+// Props type example
 type CounterProps = {
 	setCount: React.Dispatch<React.SetStateAction<number>>,
 	children: ReactNode
