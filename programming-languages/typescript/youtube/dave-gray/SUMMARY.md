@@ -2,6 +2,7 @@
 
 # Studing steps
 
+*(Sections and parts according to my own division)*
 
 ## Sections 1. Pure TypeScript
 
@@ -33,7 +34,7 @@ Code: ```./react/```
 Simple expirements with hooks, props, props drilling, list rendering.
 
 ### Part 4. React + TypeScript basic hooks: basics and useReducer() and useContext()
-useReducer() and useContext() in code: ```./react-hooks/```
+useReducer() and useContext() in code: ```./react-hooks/``` *(here don't understand some of the stuff)*
 
 Basics as summary:
 1. useState() — For creating state variable
