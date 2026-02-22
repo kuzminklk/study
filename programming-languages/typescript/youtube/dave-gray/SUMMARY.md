@@ -32,14 +32,11 @@ Code: ```./react/```
 
 Simple expirements with hooks, props, props drilling, list rendering.
 
-### Part 4. React + TypeScript basic hooks
-Only as summary:
+### Part 4. React + TypeScript basic hooks: basics and useReducer() and useContext()
+useReducer() and useContext() in code: ```./react-hooks/```
 
+Basics as summary:
 1. useState() — For creating state variable
 2. useEffect() — For apply action depends on changing some state, etc.
 3. useCallback() — For don't recreate props function each time
 4. useMemo() — For save expensive calculating value
-
-
-### Part 5. React + TypeScript useReducer() and useContext()
-Code: ```./react-hooks/```
