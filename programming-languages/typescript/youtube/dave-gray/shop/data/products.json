@@ -1,0 +1,19 @@
+{
+    "products": [
+        {
+            "sku": "white-watch",
+            "name": "White Watch",
+            "price": 10
+        },
+        {
+            "sku": "black-watch",
+            "name": "Black Watch",
+            "price": 20
+        },
+        {
+            "sku": "green-watch",
+            "name": "Green Watch",
+            "price": 30
+        }
+    ]
+}
